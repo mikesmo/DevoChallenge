@@ -3,11 +3,9 @@ const expect = require('chai').expect;
 
 require('@babel/register')();
 
-const {
-    isPalindrome,
-} = require('../src/palindromes');
+const { isPalindrome } = require('../src/palindromes');
 
-describe('Simple Math Test', () => {
+describe('Palindromes Test', () => {
     it('should return false for odd length text', () => {
         let text = 'abbaf';
         let result = isPalindrome(text);
