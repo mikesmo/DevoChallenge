@@ -1,8 +1,6 @@
 const assert = require('assert');
 const expect = require('chai').expect;
 
-require('@babel/register')();
-
 const { isPalindrome } = require('../src/palindromes');
 
 describe('Palindromes Test', () => {

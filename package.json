@@ -4,7 +4,7 @@
   "description": "",
   "main": "bin/index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --require esm"
   },
   "author": "",
   "license": "MIT",
@@ -16,10 +16,6 @@
     "esm": "^3.2.25"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
-    "@babel/node": "^7.10.4",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/register": "^7.10.4",
     "chai": "^4.2.0",
     "mocha": "^8.0.1"
   }

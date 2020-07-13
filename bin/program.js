@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-require('@babel/register')();
-
-const program = require('commander');
+const { program } = require('commander');
 const { isPalindrome } = require('../src/palindromes');
 const { isKComplementary } = require('../src/k-complementary');
+const fs = require('fs');
 
 import { TermFrequency } from '../src/term-frequency';
+import { WordCounter } from '../src/word-counter';
 
 program
     .command('palindrome <text>')
@@ -41,13 +41,20 @@ program
     .command('tdIdf')
     .option('--dir <dir>', 'Directory of documents.')
     .action(function (cmd) {
-        let fs = require('fs');
-        console.log(cmd.dir);
         let files = fs.readdirSync(cmd.dir);
-        console.log(files);
-        let freq = new TermFrequency(files);
-        let x = freq.getFiles();
-        console.log({x});
+        files = files.map(file => `${cmd.dir}/${file}`);
+
+        //let freq = new WordCounter(files[0], {chunkSize: 16});
+        //freq.readFile();
+
+        test(cmd);
     });
+
+async function test(cmd) {
+    let tf = new TermFrequency(cmd.dir);
+    await tf.refresh();
+    let sort = tf.orderByTfIdf('our');
+    console.log({sort});
+}
 
 program.parse(process.argv);

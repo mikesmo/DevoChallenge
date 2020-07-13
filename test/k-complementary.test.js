@@ -1,8 +1,6 @@
 const assert = require('assert');
 const expect = require('chai').expect;
 
-require('@babel/register')();
-
 const { isKComplementary } = require('../src/k-complementary');
 
 describe('K-Complementary Test', () => {
