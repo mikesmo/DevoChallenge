@@ -41,20 +41,16 @@ program
     .command('tdIdf')
     .option('--dir <dir>', 'Directory of documents.')
     .action(function (cmd) {
-        let files = fs.readdirSync(cmd.dir);
-        files = files.map(file => `${cmd.dir}/${file}`);
+        let orderByTfIdf = async function(cmd) {
+            let tf = new TermFrequency(cmd.dir);
+            await tf.refresh();
+            let sort = tf.orderByTfIdf('our');
+            console.log({sort});
+        }
 
-        //let freq = new WordCounter(files[0], {chunkSize: 16});
-        //freq.readFile();
-
-        test(cmd);
+        orderByTfIdf(cmd);
     });
 
-async function test(cmd) {
-    let tf = new TermFrequency(cmd.dir);
-    await tf.refresh();
-    let sort = tf.orderByTfIdf('our');
-    console.log({sort});
-}
+
 
 program.parse(process.argv);
