@@ -43,8 +43,23 @@ describe('Word Counter Test', () => {
         counter.onFileData('hello world hello.');
         counter.onFileClose(resolve);
 
-        let matches = counter.calcTf("hello");
+        let tf = counter.calcTf("hello");
 
-        expect(matches).to.equal(2/3)
+        expect(tf).to.equal(2/3)
+    });
+
+    it('should generate TF Map for array of terms', () => {
+        let expected = { 
+            hello: 2/3,
+            world: 1/3 };
+
+        let counter = new WordCounter('file', {chunkSize: 16});
+        counter.onFileData('hello world hello.');
+        counter.onFileClose(resolve);
+
+        let result = counter.calcTfMap(['hello', 'world']);
+
+        let resultObj = Object.fromEntries(result.entries());
+        expect(resultObj).to.eql(expected);
     });
 });

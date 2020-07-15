@@ -1,12 +1,14 @@
-
+/**
+ * Description. Determines if the given text is a palindrome.
+ *
+ * @param  {String} text Input text.
+ * @return {Bool}        True if the text is a palindrome.
+ */
 export const isPalindrome = (text) => {
+    // Remove white spaces.
+    text = text.replace(/ /g,'');
+
     let numOfChars = text.length;
-
-    // Check for odd length text - only even length text can be a palindrome.
-    if (numOfChars % 2 !== 0) {
-        return false;
-    }
-
     let j = numOfChars / 2 - 1;
 
     for (let posA = 0; posA <= j; posA++) {
